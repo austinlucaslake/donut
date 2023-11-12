@@ -1,10 +1,10 @@
 [project]
-name = "python-template"
+name = "donut"
 version = "0.2.3"
 authors = [
   { name="Austin Lake", email="austinlake04@gmail.com" },
 ]
-description = "Template repository for Python projects"
+description = "A rotating donut displayed in ASCII"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/austinlucaslake/python-template"
+Homepage = "https://github.com/austinlucaslake/donut"
 
 [project.optional-dependencies]
 dev = ["black", "autopep8", "flake8", "flake8-docstrings", "autoflake", "pytest", "pipreqs", "pip-tools"]
