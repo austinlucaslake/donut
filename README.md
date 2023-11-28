@@ -11,3 +11,32 @@ Quaternion rotations rendered using ASCII characters.
 [license-badge]: https://img.shields.io/github/license/austinlucaslake/donut
 [ci-badge]: https://github.com/austinlucaslake/donut/actions/workflows/ci.yaml/badge.svg
 [ci-url]: https://github.com/austinlucaslake/donut/actions
+
+
+                           - . . . . . . @ .
+                        - . . = * #       @ = .
+                      - . = *
+                    : . * #
+                  : . *
+                = - .
+                ; . .
+                : .
+              ! ~ .                     . .
+              ! ~ .                     * . . . . .
+              = : .                         = : - , . .
+              = : . .                         ! : ~ , . .
+              * ! - .                         ! ; : ~ - . .
+              * = : ~ .                       ! ! ; ; ~ , .
+              * * ! ! , .                     ! ! ! ! : - .
+              # # * = ! , .                 = = = = ! ! ~ , .
+              # # # # = ; - . .     .     # # * * * = = ; : .
+              # # $ # $ * * ; ; ; ! # @ $ $ # # # # * * ! ~
+                $ $ $ $ $ # $ * # # $ @ @ $ $ $ $ # # * = ;
+                # $ $ @ @ $ @ $ $ $ @ @ @ @ @ $ $ $ $ * * ~
+                  $ $ @ @ @ @ @ @ @ @ @ @ @ @ @ $ $ $ # = .
+                    $ @ @ @ @ @ @ @ @ @ @ @ @ @ @ $ $ * ~
+                      $ @ @ @ @ @ @ @ @ @ @ @ @ @ $ # !
+                        $ @ @ @ @ @ @ @ @ @ @ @ $ $ !
+                            @ @ @ @ @ @ @ @ @ $ # ;
+                                  @ @ @ @ $ #
+
