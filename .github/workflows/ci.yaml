@@ -47,4 +47,4 @@ jobs:
           CC: ${{ steps.install_compiler.outputs.cc }}
           CXX: ${{ steps.install_compiler.outputs.cxx }}
         with:
-          generate-options: "--preset=test"
+          generate-options: "--preset=test -lstdc++"
