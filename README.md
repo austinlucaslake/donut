@@ -1,6 +1,6 @@
 # donut
 
-A rotating donut displayed in ASCII
+Quaternion rotations rendered using ASCII characters.
 
 [![Latest Release][release-badge]][release-url]
 [![License][license-badge]](LICENSE)
