@@ -1,13 +1,13 @@
-// Copyright (c) 2023 Austin Lucas Lake
+// Copyright (c) 2023 Austin Lake
 // <53884490+austinlucaslake@users.noreply.github.com>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define x_axis (quaterion) { 0, 1, 0, 0 }
-#define y_axis (quaterion) { 0, 0, 1, 0 }
-#define z_axis (quaterion) { 0, 0, 0, 1 }
+#define x_axis (quaternion) { 0, 1, 0, 0 }
+#define y_axis (quaternion) { 0, 0, 1, 0 }
+#define z_axis (quaternion) { 0, 0, 0, 1 }
 
 typedef struct {
     float w;
@@ -28,7 +28,7 @@ float magnitude(const quaternion q) {
     return sqrt(dot_product(q, q));
 }
 
-float axial_cos(const quaternion& q1, const quaternion& q2) {
+float axial_cos(const quaternion q1, const quaternion q2) {
     return dot_product(q1, q2) / (magnitude(q1) * magnitude(q2));
 }
 
@@ -39,7 +39,7 @@ quaternion multiply(const quaternion q1, const quaternion q2) {
                          q1.w * q2.z + q1.x * q2.y - q1.y * q2.x + q1.z * q2.w};
 }
 
-const quaternion from_euler(const quaternion& axis, const float& angle) {
+const quaternion from_euler(const quaternion axis, const float angle) {
     float half_angle = angle / 2;
     return (quaternion) {cos(half_angle),
                          sin(half_angle) * axial_cos(axis, x_axis),
@@ -47,7 +47,7 @@ const quaternion from_euler(const quaternion& axis, const float& angle) {
                          sin(half_angle) * axial_cos(axis, z_axis)};
 }
 
-quaternion rotate(const quaternion& vector, const quaternion& rotation) {
+quaternion rotate(const quaternion vector, const quaternion rotation) {
     return multiply(multiply(rotation, vector), conjugate(rotation));
 }
 
@@ -60,7 +60,7 @@ int main(void) {
     float x_angle = 0, y_angle = 0, z_angle = 0;
     for (;;) {
         float display_buffer[display_size][display_size] = {};
-        memsetFloat(display_buffer, (float) display_size, sizeof display_buffer);
+        memset(display_buffer, (float) display_size, sizeof display_buffer);
         char display[display_size][display_size];
         memset(display, ' ', sizeof display);
         const quaternion rotation = multiply(multiply(from_euler(x_axis, x_angle),
