@@ -8,7 +8,7 @@ cmake_policy(SET CMP0063 NEW)
 cmake_policy(SET CMP0091 NEW)
 project(
 	donut
-	VERSION 1.0.0
+	VERSION 1.1.0
 	LANGUAGES C CXX
 	DESCRIPTION "Quaternion rotations rendered using ASCII characters.")
 
