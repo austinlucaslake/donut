@@ -1,1 +1,4 @@
 install/
+build/
+defaults.cfg
+main.plist
