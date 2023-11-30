@@ -5,7 +5,7 @@ required_conan_version = ">=2.0"
 
 class Astrosight(ConanFile):
     name = "donut"
-    version = "1.1.1"
+    version = "1.1.2"
     license = "Apache-2.0"
     author = "Austin Lake (53884490+austinlucaslake@users.noreply.github.com)"
     url = "https://github.com/austinlucaslake/donut"
@@ -13,6 +13,8 @@ class Astrosight(ConanFile):
     topics = ("quaternion", "render", "ASCII")
     settings = "arch", "compiler", "build_type", "os"
     exports_sources = "CMakeLists.txt", "src/*", "include/*"
+
+    def requirements(self):
 
     def build_requirements(self):
         self.tool_requires("cmake/[>3.23.5]")
