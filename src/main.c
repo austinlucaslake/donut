@@ -59,7 +59,8 @@ char render(const int brightness) {
 int main(void) {
     const float two_pi = 2 * M_PI, max_shift = 0.005;
     const unsigned int radius = 8;
-    const unsigned int display_size = 5 * radius, radius_squared = radius * radius;
+    const unsigned int display_size = 5 * radius,
+		               radius_squared = radius * radius;
     const float delta_theta = two_pi / 100, delta_phi = two_pi / 100;
     const quaternion light_source = {0, 0, 0, -1};
     float x_angle = 0, y_angle = 0, z_angle = 0;
@@ -68,12 +69,12 @@ int main(void) {
         char display[display_size][display_size];
         memset(display, ' ', sizeof display);
         const quaternion rotation = hamilton_product(hamilton_product(from_euler(x_axis, x_angle),
-                                                  from_euler(y_axis, y_angle)),
-                                         from_euler(z_axis, z_angle));
+                                                                      from_euler(y_axis, y_angle)),
+                                                     from_euler(z_axis, z_angle));
         for (float theta = 0; theta < two_pi; theta += delta_theta) {
             const float sin_theta = sin(theta), cos_theta = cos(theta);
             const float z = radius * sin_theta,
-                            rad_two_plus_cos_theta = radius * (2 + cos_theta);
+                        rad_two_plus_cos_theta = radius * (2 + cos_theta);
             const float rad_sq_two_plus_cos_theta = radius * rad_two_plus_cos_theta;
             for (float phi = 0; phi < two_pi; phi += delta_phi) {
                 const float sin_phi = sin(phi), cos_phi = cos(phi);
