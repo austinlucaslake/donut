@@ -14,8 +14,6 @@ class Astrosight(ConanFile):
     settings = "arch", "compiler", "build_type", "os"
     exports_sources = "CMakeLists.txt", "src/*", "include/*"
 
-    def requirements(self):
-
     def build_requirements(self):
         self.tool_requires("cmake/[>3.23.5]")
         self.test_requires("cppcheck/2.12.1")
