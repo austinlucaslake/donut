@@ -65,7 +65,6 @@ int main(void) {
     float x_angle = 0, y_angle = 0, z_angle = 0;
     for (;;) {
         float display_buffer[display_size][display_size] = {};
-        memset(display_buffer, (float) display_size, sizeof display_buffer);
         char display[display_size][display_size];
         memset(display, ' ', sizeof display);
         const quaternion rotation = hamilton_product(hamilton_product(from_euler(x_axis, x_angle),
