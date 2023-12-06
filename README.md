@@ -16,7 +16,6 @@ Quaternion rotations rendered using ASCII characters.
 
 ---
 
-
                               * *   * * * *
                     ~   = * * * * * * * * * * * * *
                 - ! ! = * * * * * * * * * * * * * * * *
@@ -64,6 +63,4 @@ Quaternion rotations rendered using ASCII characters.
                           . . ; = * * * * = = = ! ! ; ; : , .
                               . , - * = ! ; ; : ; ~ - . . .
                                     ; ~ - , - . . . .
-
-
 
