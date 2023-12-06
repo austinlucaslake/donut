@@ -33,6 +33,10 @@ option(BUILD_TESTING "Build tests" FALSE)
 option(BUILD_SHARED_LIBS "Build shared libraries" FALSE)
 option(BUILD_WITH_MT "Build libraries as MultiThreaded DLL (Windows Only)" FALSE)
 
+add_compile_options(
+  "-Wall" "-Wpedantic" "-Wextra"
+)
+
 include(CTest)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
