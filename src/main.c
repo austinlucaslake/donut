@@ -48,12 +48,12 @@ static inline quaternion hamilton_product(const quaternion q1, const quaternion 
 }
 
 static quaternion from_euler(const float roll, const float pitch, const float yaw) {
-    const float sin_roll = sin(roll);
-    const float cos_roll = cos(roll);
-    const float sin_pitch = sin(pitch);
-    const float cos_pitch = cos(pitch);
-    const float sin_yaw = sin(yaw);
-    const float cos_yaw = cos(yaw);
+    const float sin_roll = sin(roll * 0.5f);
+    const float cos_roll = cos(roll * 0.5f);
+	const float sin_pitch = sin(pitch * 0.5f);
+    const float cos_pitch = cos(pitch * 0.5f);
+	const float sin_yaw = sin(yaw * 0.5f);
+    const float cos_yaw = cos(yaw * 0.5f);
     return (quaternion) {
         cos_roll * cos_pitch * cos_yaw + sin_roll * sin_pitch * sin_yaw,
         sin_roll * cos_pitch * cos_yaw - cos_roll * sin_pitch * sin_yaw,
@@ -62,14 +62,12 @@ static quaternion from_euler(const float roll, const float pitch, const float ya
     };
 }
 
-static quaternion rotate_about_axis(const quaternion axis, const float angle) {
-    const float half_angle = angle * 0.5f;
-    const float sin_half_angle = sin(half_angle);
+static inline quaternion rotate_about_axis(const quaternion axis, const float angle) {
     return (quaternion) {
-        cos(half_angle),
-        sin_half_angle * axial_cos(axis, X_AXIS),
-        sin_half_angle * axial_cos(axis, Y_AXIS),
-        sin_half_angle * axial_cos(axis, Z_AXIS)
+        cos(angle*0.5),
+        sin(angle*0.5) * axial_cos(axis, X_AXIS),
+        sin(angle*0.5) * axial_cos(axis, Y_AXIS),
+        sin(angle*0.5) * axial_cos(axis, Z_AXIS)
     };
 }
 
@@ -89,28 +87,23 @@ int main(void) {
         for (float theta = 0.0f; theta < TWO_PI; theta += 0.05f) {
             const float sin_theta = sin(theta);
             const float cos_theta = cos(theta);
-            const float z = RADIUS * sin_theta;
-            const float a0 = RADIUS * (2.0f + cos_theta);
-            const float a1 = a0 * RADIUS;
-            const float a2 = a1 * sin_theta;
-            const float a3 = a1 * cos_theta;
             for (float phi = 0.0f; phi < TWO_PI; phi += 0.05f) {
                 const float sin_phi = sin(phi);
                 const float cos_phi = cos(phi);
                 quaternion normal = (quaternion) {
 					0.0f,
-                    a3 * cos_phi,
+                    RADIUS * RADIUS * (2.0f + cos_theta) * cos_phi,
                     RADIUS * RADIUS * cos_phi * cos_phi * cos_phi,
-                    a2 * sin_phi + a3 * cos_phi
+                    RADIUS * RADIUS * (2.0f + cos_theta) * (sin_theta * sin_phi + cos_theta * cos_phi)
                 };
                 normal = apply_rotation(normal, rotation);
                 const int8_t brightness = (int8_t) 8.0f * sqrt(2) * axial_cos(normal, LIGHT_SOURCE);
                 if (brightness >= 0) {
                     quaternion position = (quaternion) {
 						0.0f,
-                        a0 * cos_phi,
-                        a0 * sin_phi,
-                        z    
+                        RADIUS * (2.0f + cos_theta) * cos_phi,
+                        RADIUS * (2.0f + cos_theta) * sin_phi,
+                        RADIUS * sin_theta
                     };
                     position = apply_rotation(position, rotation);
                     const float z_buffer = position.z - 5.0f*RADIUS;
