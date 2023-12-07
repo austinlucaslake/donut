@@ -6,6 +6,7 @@ set(target main)
 message(STATUS "Test ${target}")
 
 set(sources
+    quaternion.h
     main.c
 )
 
