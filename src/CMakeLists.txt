@@ -13,8 +13,6 @@ add_executable(${target}
     ${sources}
 )
 
-add_executable(${META_PROJECT_NAME}::${target} ALIAS ${target})
-
 set_target_properties(${target}
     PROPERTIES
     ${DEFAULT_PROJECT_OPTIONS}
