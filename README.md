@@ -1,4 +1,4 @@
-# donut
+# quaternion
 
 Quaternion rotations rendered using ASCII characters.
 

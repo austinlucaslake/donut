@@ -7,15 +7,16 @@ cmake_minimum_required(VERSION 3.15.0 FATAL_ERROR)
 cmake_policy(SET CMP0063 NEW)
 cmake_policy(SET CMP0091 NEW)
 project(
-	donut
-	VERSION 1.1.3
-	LANGUAGES C
-	DESCRIPTION "Quaternion rotations rendered using ASCII characters.")
+    quaternion
+    VERSION 1.1.2
+    LANGUAGES C
+    DESCRIPTION "Quaternion rotations rendered using ASCII characters.")
 
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED TRUE)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_VISIBILITY_PRESET hidden)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
