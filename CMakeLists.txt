@@ -8,7 +8,7 @@ cmake_policy(SET CMP0063 NEW)
 cmake_policy(SET CMP0091 NEW)
 project(
     quaternion
-    VERSION 1.1.2
+    VERSION 1.2.0
     LANGUAGES C
     DESCRIPTION "Quaternion rotations rendered using ASCII characters.")
 
