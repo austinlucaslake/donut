@@ -62,15 +62,6 @@ static quaternion from_euler(const float roll, const float pitch, const float ya
     };
 }
 
-static inline quaternion rotate_about_axis(const quaternion axis, const float angle) {
-    return (quaternion) {
-        cos(angle*0.5),
-        sin(angle*0.5) * axial_cos(axis, X_AXIS),
-        sin(angle*0.5) * axial_cos(axis, Y_AXIS),
-        sin(angle*0.5) * axial_cos(axis, Z_AXIS)
-    };
-}
-
 static quaternion apply_rotation(const quaternion vector, const quaternion rotation) {
     return hamilton_product(hamilton_product(rotation, vector), conjugate(rotation));
 }
@@ -108,8 +99,8 @@ int main(void) {
                     position = apply_rotation(position, rotation);
                     const float z_buffer = position.z - 5.0f*RADIUS;
 					const float z_inverse = 1.0f / (position.z + 5.0f*RADIUS);
-                    const uint16_t x = (uint16_t) (SCREEN_WIDTH/2) * (1.0f + position.x * z_inverse);
-                    const uint16_t y = (uint16_t) (SCREEN_HEIGHT/2) * (1.0f + position.y * z_inverse);
+                    const uint16_t x = (uint16_t) (SCREEN_WIDTH * 0.5f) * (1.0f + position.x * z_inverse);
+                    const uint16_t y = (uint16_t) (SCREEN_HEIGHT * 0.5f) * (1.0f + position.y * z_inverse);
                     if (z_buffer <= display_buffer[y][x]) {
                         display_buffer[y][x] = z_buffer;
                         display[y][x] = ".,-~:;!=*#$@"[brightness];
