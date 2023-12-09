@@ -1,34 +1,22 @@
-#pragma once
+#ifndef QUATERNION_C
+#define QUATERNION_C
 
 #include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
+#include "quaternion.h"
 
-#define X_AXIS (quaternion) { 0, 1, 0, 0 }
-#define Y_AXIS (quaternion) { 0, 0, 1, 0 }
-#define Z_AXIS (quaternion) { 0, 0, 0, 1 }
-
-typedef struct {
-    float w;
-    float x;
-    float y;
-    float z;
-} quaternion;
-
-inline quaternion conjugate(const quaternion q) {
+quaternion conjugate(const quaternion q) {
     return (quaternion) { q.w, -q.x, -q.y, -q.z };
 }
 
-inline float dot_product(const quaternion q1, const quaternion q2) {
+float dot_product(const quaternion q1, const quaternion q2) {
     return q1.w * q2.w + q1.x * q2.x + q1.y * q2.y + q1.z * q2.z;
 }
 
-inline float magnitude(const quaternion v) {
+float magnitude(const quaternion v) {
     return sqrt(dot_product(v, v));
 }
 
-inline float axial_cos(const quaternion q1, const quaternion q2) {
+float axial_cos(const quaternion q1, const quaternion q2) {
     return dot_product(q1, q2) / (magnitude(q1) * magnitude(q2));
 }
 
@@ -68,3 +56,5 @@ quaternion from_euler(const float roll, const float pitch, const float yaw) {
 quaternion apply_rotation(const quaternion vector, const quaternion rotation) {
     return hamilton_product(hamilton_product(rotation, vector), conjugate(rotation));
 }
+
+#endif
