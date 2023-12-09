@@ -1,12 +1,15 @@
 // Copyright (c) 2023 Austin Lake
 // <53884490+austinlucaslake@users.noreply.github.com>
-
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdint.h>
 #include "quaternion.h"
 
-#define RADIUS 8
-#define SCREEN_WIDTH 75
-#define SCREEN_HEIGHT 75
-#define LIGHT_SOURCE (quaternion) { 0, 0, 1, -1 }
+#define RADIUS 10
+#define SCREEN_WIDTH 50
+#define SCREEN_HEIGHT 50
+#define LIGHT_SOURCE (quaternion) { 0, 0, -1, -1 }
 
 int main(void) {
     float roll = 0;
@@ -39,8 +42,8 @@ int main(void) {
                         RADIUS * sin_theta
                     };
                     position = apply_rotation(position, rotation);
-                    const float z_buffer = position.z - 5*RADIUS;
-                    const float z_inverse = 1 / (position.z + 5*RADIUS);
+                    const float z_buffer = position.z - 5 * RADIUS;
+                    const float z_inverse = 1 / (position.z + 5 * RADIUS);
                     const uint16_t x = (uint16_t) (SCREEN_WIDTH * 0.5) * (1 + position.x * z_inverse);
                     const uint16_t y = (uint16_t) (SCREEN_HEIGHT * 0.5) * (1 + position.y * z_inverse);
                     if (z_buffer <= display_buffer[y][x]) {
@@ -57,9 +60,9 @@ int main(void) {
             putchar('\n');
         }
         printf("\033[H");
-        roll += 0.005;
-        pitch += 0.003;
-        yaw += 0.002;
+        roll += 0.0011;
+        pitch += 0.0007;
+        yaw += 0.0005;
         memset(display_buffer, 0, sizeof(float) * SCREEN_HEIGHT * SCREEN_WIDTH);
     }
 }
