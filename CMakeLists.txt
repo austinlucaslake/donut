@@ -3,14 +3,15 @@
 #
 # Main CMake Project file
 cmake_minimum_required(VERSION 3.15.0 FATAL_ERROR)
+project(
+    quaternion
+    VERSION 1.2.1
+    LANGUAGES C
+    DESCRIPTION "Quaternion rotations rendered using ASCII characters."
+)
 
 cmake_policy(SET CMP0063 NEW)
 cmake_policy(SET CMP0091 NEW)
-project(
-    quaternion
-    VERSION 1.2.0
-    LANGUAGES C
-    DESCRIPTION "Quaternion rotations rendered using ASCII characters.")
 
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED TRUE)
@@ -29,10 +30,6 @@ set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR} ${CMAKE_PREFIX_PATH})
 option(BUILD_TESTING "Build tests" FALSE)
 option(BUILD_SHARED_LIBS "Build shared libraries" FALSE)
 option(BUILD_WITH_MT "Build libraries as MultiThreaded DLL (Windows Only)" FALSE)
-
-add_compile_options(
-  "-Wall" "-Wpedantic" "-Wextra"
-)
 
 include(CTest)
 include(GNUInstallDirs)
