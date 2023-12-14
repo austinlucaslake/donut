@@ -1,8 +1,6 @@
-# Apache-2.0 License 
-# Copyright (c) 2023 Austin Lake <53884490+austinlucaslake@users.noreply.github.com>
-#
-# Main CMake Project file
-cmake_minimum_required(VERSION 3.15.0 FATAL_ERROR)
+# Apache 2.0 License 
+# Copyright (c) 2023 Austin Lucas Lake <53884490+austinlucaslake@users.noreply.github.com>
+cmake_minimum_required(VERSION 3.23.5 FATAL_ERROR)
 project(
     quaternion
     VERSION 1.2.1
@@ -13,7 +11,7 @@ project(
 cmake_policy(SET CMP0063 NEW)
 cmake_policy(SET CMP0091 NEW)
 
-set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED TRUE)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_VISIBILITY_PRESET hidden)
@@ -31,10 +29,24 @@ option(BUILD_TESTING "Build tests" FALSE)
 option(BUILD_SHARED_LIBS "Build shared libraries" FALSE)
 option(BUILD_WITH_MT "Build libraries as MultiThreaded DLL (Windows Only)" FALSE)
 
-include(CTest)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 include(InstallRequiredSystemLibraries)
 include(GenerateExportHeader)
 
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+  include(CTest)
+  find_package(Doxygen)
+  if(Doxygen_FOUND)
+    add_subdirectory(docs)
+  else()
+    message(STATUS "Doxygen not found, not building docs")
+  endif()
+endif()
+
+add_library(quaternion src/quaternion.c)
+target_include_directories(quaternion PUBLIC include)
+set_target_properties(quaternion PROPERTIES PUBLIC_HEADER "include/quaternion.h")
+
 add_subdirectory(src)
+add_subdirectory(test)

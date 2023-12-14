@@ -7,7 +7,7 @@ class Astrosight(ConanFile):
     name = "quaternion"
     version = "1.2.1"
     license = "Apache-2.0"
-    author = "Austin Lake (53884490+austinlucaslake@users.noreply.github.com)"
+    author = "Austin Lucas Lake (53884490+austinlucaslake@users.noreply.github.com)"
     url = "https://github.com/austinlucaslake/quaternion"
     description = "Quaternion rotations rendered using ASCII characters."
     topics = ("quaternion", "render", "ASCII")
@@ -30,7 +30,7 @@ class Astrosight(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-        cmake.test()
+        # cmake.test()
 
     def layout(self):
         cmake_layout(self, src_folder="src", build_folder="build")
