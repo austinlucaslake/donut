@@ -4,38 +4,43 @@
 #define QUATERNION_H
 
 #include <math.h>
-#include <stdio.h>
-#include <string.h>
+#include <stddef.h>
 #include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct Quaternion {
-	float w;
-	float x;
-	float y;
-	float z;
-} Quaternion;
+#ifndef QUATERNION_NAMESPACE
+#define QUATERNION_NAMESPACE q_
 
-float inv_sqrt(float number);
+#define C_(a,b) a##b
+#define C(a,b) C_(a,b)
+#define N(a) C(QUATERNION_NAMESPACE, a)
 
-float dot(const Quaternion q1, const Quaternion q2);
+float N(inv_sqrt)(float number);
 
-float magnitude(const Quaternion q);
+float N(dot)(const float * const q1, const float * const q2);
 
-float axial_cos(const Quaternion q1, const Quaternion q2);
+float N(magnitude)(const float * const q);
 
-Quaternion about_axis(const Quaternion axis, const float angle);
+float N(axial_cos)(const float * const restrict q1,
+		const float * const restrict q2);
 
-Quaternion from_euler(const float angles[3]);
+float * N(about_axis)(const float * const axis,
+		const float angle);
 
-Quaternion conjugate(const Quaternion q);
+float * N(from_euler)(const float * const angles);
 
-Quaternion hamilton(const Quaternion q1, const Quaternion q2);
+float * N(conjugate)(const float * const q);
 
-Quaternion rotate(const Quaternion vector, const Quaternion rotation);
+float * N(hamilton)(const float * const restrict q1,
+		const float * const restrict q2);
+
+void N(rotate)(float * const restrict vector,
+		const float * const restrict rotation);
+
+#endif // QUATERNION_NAMESPACE
 
 #ifdef __cplusplus
 }
