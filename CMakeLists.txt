@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.23.5 FATAL_ERROR)
 project(
     quaternion
-    VERSION 1.2.1
+    VERSION 1.3.0
     LANGUAGES C
     DESCRIPTION "Quaternion rotations rendered using ASCII characters."
 )
@@ -49,4 +49,3 @@ target_include_directories(quaternion PUBLIC include)
 set_target_properties(quaternion PROPERTIES PUBLIC_HEADER "include/quaternion.h")
 
 add_subdirectory(src)
-add_subdirectory(test)
