@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 3.15.0 FATAL_ERROR)
+# Apache 2.0 License 
+# Copyright (c) 2023 Austin Lucas Lake <53884490+austinlucaslake@users.noreply.github.com>
+cmake_minimum_required(VERSION 3.23.5 FATAL_ERROR)
 project(quaternion)
 
 
@@ -8,7 +10,7 @@ set(target main)
 message(STATUS "Test ${target}")
 
 set(sources
-	quaternion.c
+    quaternion.c
     main.c
 )
 
@@ -40,7 +42,7 @@ target_compile_definitions(${target}
 )
 
 set(DEFULAT_COMPILE_OPTIONS
-    -Wall -Wextra -Wpedantic
+	"-Wall -Wextra -Wpedantic -Werror"
 )
 target_compile_options(${target}
     PRIVATE
@@ -48,7 +50,7 @@ target_compile_options(${target}
 )
 
 set(DEBUG_COMPILE_OPTIONS
-    -O0 -Werror
+    "-O0"
 )
 target_compile_options(${target}
     PRIVATE
@@ -56,7 +58,7 @@ target_compile_options(${target}
 )
 
 set(DEBUG_COMPILE_OPTIONS
-    -O3
+    "-O3"
 )
 target_compile_options(${target}
     PRIVATE

@@ -1,36 +1,49 @@
+// Copyright (c) 2023 Austin Lucas Lake
+// <53884490+austinlucaslake@users.noreply.github.com>
 #ifndef QUATERNION_H
 #define QUATERNION_H
 
 #include <math.h>
-#include <stdio.h>
-#include <string.h>
+#include <stddef.h>
 #include <stdint.h>
 
-#define X_AXIS (quaternion) { 0, 1, 0, 0 }
-#define Y_AXIS (quaternion) { 0, 0, 1, 0 }
-#define Z_AXIS (quaternion) { 0, 0, 0, 1 }
-
-typedef struct {
-    float w;
-    float x;
-    float y;
-    float z;
-} quaternion;
-
-quaternion conjugate(const quaternion q);
-
-float dot_product(const quaternion q1, const quaternion q2);
-
-float magnitude(const quaternion v);
-
-float axial_cos(const quaternion q1, const quaternion q2);
-
-quaternion hamilton_product(const quaternion q1, const quaternion q2);
-
-quaternion rotate_about_axis(const quaternion axis, const float angle);
-
-quaternion from_euler(const float roll, const float pitch, const float yaw);
-
-quaternion apply_rotation(const quaternion vector, const quaternion rotation);
-
+#ifdef __cplusplus
+extern "C" {
 #endif
+
+#ifndef QUATERNION_NAMESPACE
+#define QUATERNION_NAMESPACE q_
+
+#define C_(a,b) a##b
+#define C(a,b) C_(a,b)
+#define N(a) C(QUATERNION_NAMESPACE, a)
+
+float N(inv_sqrt)(float number);
+
+float N(dot)(const float * const q1, const float * const q2);
+
+float N(magnitude)(const float * const q);
+
+float N(axial_cos)(const float * const restrict q1,
+		const float * const restrict q2);
+
+float * N(about_axis)(const float * const axis,
+		const float angle);
+
+float * N(from_euler)(const float * const angles);
+
+float * N(conjugate)(const float * const q);
+
+float * N(hamilton)(const float * const restrict q1,
+		const float * const restrict q2);
+
+void N(rotate)(float * const restrict vector,
+		const float * const restrict rotation);
+
+#endif // QUATERNION_NAMESPACE
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // QUATERNION_H
