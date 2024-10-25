@@ -11,8 +11,6 @@
 #define SCREEN_HEIGHT 50
 
 int main(void) {
-    const float RADIUS_SQ = RADIUS * RADIUS;
-    const float FIVE_RADIUS = 5.0f * RADIUS;
     float euler_angles[3] = { 0.0f, 0.0f, 0.0f };
     float light_source[4] = { 0.0f, 0.0f, 0.0f, -1.0f };
     char display[SCREEN_HEIGHT][SCREEN_WIDTH];
@@ -31,24 +29,29 @@ int main(void) {
             for (float phi = 0.0f; phi < 2.0f*M_PI; phi += 0.05f) {
                 const float sin_phi = sin(phi);
                 const float cos_phi = cos(phi);
-				float normal[4] = {
-					0.0f,
-					a1 * cos_phi,
-					RADIUS_SQ * cos_phi * cos_phi * cos_phi,
-					a2 * sin_phi + a3 * cos_phi
+				q_Quaternion normal = (q_Quaternion) {
+					.w = 0.0f,
+					.x = a1 * cos_phi,
+					.y = RADIUS * RADIUS * cos_phi * cos_phi * cos_phi,
+					.z = a2 * sin_phi + a3 * cos_phi
 				};
 				q_rotate(normal, rotation);
 				const int8_t brightness = (int8_t) (8.0f * sqrt(2) *
 					q_axial_cos(normal, light_source));
                 if (brightness >= 0) {
-					float position[4] = { 0.0f, a0 * cos_phi, a0 * sin_phi, z };
+					float position[4] = (q_Quaternion) {
+                        .w = 0.0f,
+                        .x = a0 * cos_phi,
+                        .y = a0 * sin_phi,
+                        .z = z
+                    };
 					q_rotate(position, rotation);
-					const float z_buffer = position[3] - FIVE_RADIUS;
-					const float z_inverse = 1.0f / (position[3] + FIVE_RADIUS);
+					const float z_buffer = position.z - 5*RADIUS;
+					const float z_inverse = 1.0f / (position.z + 5*RADIUS);
 					const size_t x = (size_t) ((SCREEN_WIDTH * 0.5f) *
-						(1.0f + position[1] * z_inverse));
+						(1.0f + position.x * z_inverse));
 					const size_t y = (size_t) ((SCREEN_HEIGHT * 0.5f) *
-						(1.0f + position[2] * z_inverse));
+						(1.0f + position.y * z_inverse));
                     if (z_buffer <= display[y][x]) {
                         display[y][x] = ".,-~:;!=*#$@"[brightness];
                         display_buffer[y][x] = z_buffer;
@@ -63,8 +66,8 @@ int main(void) {
             putchar('\n');
         }
         printf("\033[H");
-        euler_angles[0] += 0.0011f;
-        euler_angles[1] += 0.0007f;
-        euler_angles[2] += 0.0005f;
+        row += 0.0005f;
+        pitch += 0.0003f;
+        yaw += 0.0002f;
     }
 }

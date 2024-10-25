@@ -18,27 +18,34 @@ extern "C" {
 #define C(a,b) C_(a,b)
 #define N(a) C(QUATERNION_NAMESPACE, a)
 
-float N(inv_sqrt)(float number);
+typedef struct {
+    float w;
+    float x;
+    float y;
+    float z;
+} N(Quaternion);
 
-float N(dot)(const float * const q1, const float * const q2);
+float N(fast_inv_sqrt)(float number);
 
-float N(magnitude)(const float * const q);
+float N(dot)(const N(Quaternion) q1, const N(Quaternion) q2);
 
-float N(axial_cos)(const float * const restrict q1,
-		const float * const restrict q2);
+float N(magnitude)(const N(Quaternion) q);
 
-float * N(about_axis)(const float * const axis,
+float N(axial_cos)(const N(Quaternion) q1,
+		const N(Quaternion) q2);
+
+N(Quaternion) N(about_axis)(const N(Quaternion) axis,
 		const float angle);
 
-float * N(from_euler)(const float * const angles);
+N(Quaternion) N(from_euler)(const N(Quaternion) angles);
 
-float * N(conjugate)(const float * const q);
+N(Quaternion) N(conjugate)(const N(Quaternion) q);
 
-float * N(hamilton)(const float * const restrict q1,
-		const float * const restrict q2);
+N(Quaternion) N(hamilton)(const N(Quaternion) q1,
+		const N(Quaternion) q2);
 
-void N(rotate)(float * const restrict vector,
-		const float * const restrict rotation);
+N(Quaternion) N(rotate)(const N(Quaternion) vector,
+		const N(Quaternion) rotation);
 
 #endif // QUATERNION_NAMESPACE
 
